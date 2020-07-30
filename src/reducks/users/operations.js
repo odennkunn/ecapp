@@ -64,10 +64,10 @@ export const signIn = (email, password) => {
 }
 
 //アカウント作成
-export const signUp = (username, email, password, confirmPassword) => {
+export const signUp = (username, email, password, confirmPassword, role) => {
   return async (dispatch) => {
     //validation
-    if (username === "" || email === "" || password === "" || confirmPassword === "") {
+    if (username === "" || email === "" || password === "" || confirmPassword === "" || role === "") {
       alert('必須項目が未入力です')
       return false
     }
@@ -88,14 +88,15 @@ export const signUp = (username, email, password, confirmPassword) => {
           const userInitialData = {  //user作成時のデータ
             created_at: timestamp,
             email: email,
-            role: 'customer',
+            role: role,
             uid: uid,
             updated_at: timestamp,
-            usename: username
+            username: username
           }
 
           db.collection('users').doc(uid).set(userInitialData)  //firestoreに保存
             .then(() => {
+              alert('アカウントが作成できました!')
               dispatch(push('/'))  //作成後のページ遷移
             })
         }
