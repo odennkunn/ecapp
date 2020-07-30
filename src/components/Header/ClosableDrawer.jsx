@@ -14,10 +14,11 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {TextInput} from "../UIkit";
 import { push } from 'connected-react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {signOut} from '../../reducks/users/operations';
 import { useEffect } from 'react';
 import { db } from '../../firebase';
+import { getUserRole } from '../../reducks/users/selectors';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -40,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 const ClosableDrawer = (props) => {
 
   const classes = useStyles();
+  const selector = useSelector((state) => state);
+  const userRole = getUserRole(selector);
   const {container} = props;
   const dispatch = useDispatch();
 
@@ -60,13 +63,6 @@ const ClosableDrawer = (props) => {
     {func: selectMenu, label: 'メンズ', id: 'male', value: '/?gender=male'},
     {func: selectMenu, label: 'レディース', id: 'female', value: '/?gender=female'}
   ])
-
-  //ドロワーメニュー内の選択肢の連想配列
-  const menus = [
-    {func: selectMenu, label: '商品登録', icon: <AddCircleIcon />, id: 'register', value: '/product/edit'},
-    {func: selectMenu, label: '注文履歴', icon: <HistoryIcon />, id: 'history', value: '/order/history'},
-    {func: selectMenu, label: 'プロフィール', icon: <PersonIcon />, id: 'profile', value: '/user/mypage'}
-  ];
 
   //カテゴリー表示
   useEffect(() => {
@@ -101,25 +97,38 @@ const ClosableDrawer = (props) => {
               fullWidth={false} label={'キーワードを検索'}　multiline={false}
               onChange={inputKeyword} required={false} rows={1}　value={keyword} type={'text'}
             />
-            <IconButton>
+            <IconButton >
               <SearchIcon />
             </IconButton>
           </div>
           <Divider />
           <List>
-            {menus.map(menu => (  //上記の連想配列をmapで回す
-              <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
+            {userRole === 'customer' ? (
+              <ListItem button key='history' onClick={() => dispatch(push('/order/history'))}>
                 <ListItemIcon>
-                  {menu.icon}
+                  <HistoryIcon />
                 </ListItemIcon>
-                <ListItemText primary={menu.label} />
+                <ListItemText primary={'注文履歴'} />
               </ListItem>
-            ))}
+            ) : (
+              <ListItem button key='register' onClick={() => dispatch(push('/product/edit'))}>
+                <ListItemIcon>
+                  <AddCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary={'商品登録'} />
+              </ListItem>
+            )}
+            <ListItem button key='profile' onClick={() => console.log(userRole)}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={'プロフィール'} />
+            </ListItem>
             <ListItem button key='logout' onClick={() => dispatch(signOut())}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary={'logout'} />
+              <ListItemText primary={'ログアウト'} />
             </ListItem>
           </List>
           <Divider/>

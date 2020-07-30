@@ -4,16 +4,25 @@ import {Badge} from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MenuIcon from "@material-ui/icons/Menu";
-import {getProductsInCart} from '../../reducks/users/selectors';
+import {getProductsInCart, getUserRole} from '../../reducks/users/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../firebase';
 import {fetchProductsInCart} from '../../reducks/users/operations';
 import {getUserId} from '../../reducks/users/selectors';
 import { push } from 'connected-react-router';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  menuIcon: {
+    color: '#fff'
+  }
+});
 
 const HeaderMenu = (props) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const selector = useSelector((state) => state);
+  const userRole = getUserRole(selector);
   const uid = getUserId(selector);  //useridの取得
   let productsInCart = getProductsInCart(selector);  //card内情報の取得
 
@@ -23,7 +32,6 @@ const HeaderMenu = (props) => {
         snapshots.docChanges().forEach(change => {
           const product = change.doc.data();  //変更を加えるカート内の情報を取得
           const changeType = change.type;  //added、modified、removeのタイプを変数に
-
           switch (changeType) {
             case 'added':  //追加したとき
               productsInCart.push(product)  //pushで追加
@@ -45,16 +53,20 @@ const HeaderMenu = (props) => {
 
   return (
     <>
-      <IconButton onClick={() => dispatch(push('/cart'))}>
-        <Badge badgeContent={productsInCart.length} color="secondary">  {/* カート数字表示 */}
-          <ShoppingCartIcon />
-        </Badge>
-      </IconButton>
-      <IconButton>
-        <FavoriteBorderIcon />
-      </IconButton>
+    {userRole === 'customer' && (
+      <>
+        <IconButton onClick={() => dispatch(push('/cart'))}>
+          <Badge badgeContent={productsInCart.length} color="secondary">  {/* カート数字表示 */}
+            <ShoppingCartIcon className={classes.menuIcon} />
+          </Badge>
+        </IconButton>
+        <IconButton >
+          <FavoriteBorderIcon className={classes.menuIcon} />
+        </IconButton>
+      </>
+    )}
       <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
-        <MenuIcon />
+        <MenuIcon className={classes.menuIcon} />
       </IconButton>
     </>
   )
