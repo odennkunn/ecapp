@@ -5,7 +5,6 @@ import { saveProduct } from '../reducks/products/operations';  //商品登録の
 import ImageArea from '../components/Products/ImageArea';  //画像登録のコンポーネント
 import { db } from '../firebase';
 import SetSizeArea from '../components/Products/SetSizeArea';
-import { List } from '@material-ui/core';
 
 const ProductEdit = () => {
 
@@ -42,7 +41,6 @@ const ProductEdit = () => {
   }, [setPrice])
 
   //仮のセレクトボックスのデータ
-
   const genders = [
     {id: 'all', name: 'すべて'},
     {id: 'male', name: 'メンズ'},
