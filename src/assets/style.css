@@ -25,6 +25,16 @@
   width: 100%;
 }
 
+.c-section-gray {
+  margin: 0 auto;
+  padding: 50px;
+  max-width: 800px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  border: 1px solid #e6e6e6;
+  width: calc(100% - 2rem);
+}
+
 .c-section-container {
   margin: 0 auto;
   max-width: 400px;
@@ -138,9 +148,13 @@
 }
 
 .u-text__headline {
-  color: #4dd0e1;
+  color: #323232;
   font-size: 1.563rem;
   margin: 0 auto 1rem auto;
+}
+
+.text-pointer {
+  cursor: pointer;
 }
 
 .u-display-none {
