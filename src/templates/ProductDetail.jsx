@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import HTMLReactParser from 'html-react-parser';
 import {ImageSwiper, SizeTable} from '../components/Products';
 import {addProductToCart} from '../reducks/users/operations';
+import { getUserRole } from '../reducks/users/selectors';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +52,7 @@ const ProductDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);  //stateの情報を取得
+  const userRole = getUserRole(selector);
   const path = selector.router.location.pathname;  // /prouduct/idの部分を定数に
   const id = path.split('/product/')[1];  //urlのidの部分だけを取得
 
@@ -91,7 +93,9 @@ const ProductDetail = () => {
             <h2 className="u-text__headline">{product.name}</h2>
             <p className={classes.price}>{product.price.toLocaleString()}</p>
             <div className="module-spacer--small" />
-            <SizeTable sizes={product.sizes} addProduct={addProduct} />
+            {userRole === 'customer' && (
+              <SizeTable sizes={product.sizes} addProduct={addProduct} />
+            )}
             <div className="module-spacer--small" />
             <p>{returnCodeToBr(product.description)}</p>
           </div>
