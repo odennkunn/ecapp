@@ -5,8 +5,8 @@ import {makeStyles} from '@material-ui/styles';
 //style変更のためのclass作成
 const useStyles = makeStyles({
   'button': {
-    backgroundColor: '#4dd0e1',
-    color: '#000',
+    backgroundColor: '#D2B48C',
+    color: '#fff',
     fontSize: 16,
     height: 48,
     marginBottom: 16,

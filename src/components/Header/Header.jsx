@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import logo from '../../assets/img/logo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import {getIsSignedIn} from '../../reducks/users/selectors';
 import { push } from 'connected-react-router';
@@ -13,8 +12,9 @@ const useStyles = makeStyles({
     flexGrow: 1
   },
   menuBar: {
-    backgroundColor: '#FFF',
-    color: '#444'
+    backgroundColor: '#323232',
+    color: '#fff',
+    boxShadow: 'none'
   },
   toolBar: {
     margin: '0 auto',
@@ -23,6 +23,9 @@ const useStyles = makeStyles({
   },
   iconButtons: {
     margin: '0 0 0 auto'
+  },
+  logo: {
+    fontSize: '1.5rem'
   }
 });
 
@@ -47,10 +50,7 @@ const Header = () => {
     <div className={classes.root} >
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
-          <img
-            src={logo} alt="logo" width="128px"
-            onClick={() => dispatch(push('/'))}
-          />
+          <p width="128px" className={classes.logo} onClick={() => dispatch(push('/'))}>LOGO</p>
           {isSignedIn && (
             <div className={classes.iconButtons}>
               <HeaderMenu handleDrawerToggle={handleDrawerToggle} />
