@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     display: 'flex',
     marginLeft: 32
+  },
+  listText: {
+    color: '#646464'
   }
 }));
 
@@ -131,11 +134,13 @@ const ClosableDrawer = (props) => {
               <ListItemText primary={'ログアウト'} />
             </ListItem>
           </List>
-          <Divider/>
+          <div className="module-spacer--small" />
+          <p className="menu-category">カテゴリー</p>
+          <Divider />
           <List>
             {filters.map(filter => (
               <ListItem button key={filter.id} onClick={(e) => filter.func(e, filter.value)}>
-                <ListItemText primary={filter.label} />
+                <ListItemText primary={filter.label} className={classes.listText} />
               </ListItem>
             ))}
           </List>

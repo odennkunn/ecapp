@@ -129,6 +129,12 @@
   font-size: 1.3rem;
 }
 
+.menu-category {
+  padding-left: 16px;
+  font-size: 1.2rem;
+  color: #2d2d2d;
+}
+
 /*********** Footer ***********/
 .l-footer {
   display: flex;
