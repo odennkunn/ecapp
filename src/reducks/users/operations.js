@@ -149,8 +149,13 @@ export const addProductToCart = (addedProduct) => {
 
 //cartの情報を更新する関数
 export const fetchProductsInCart = (products) => {
-  return async (dispatch) => {
-    dispatch(fetchProductsInCartAction(products))  //actionの呼び出し
+  return async (dispatch, getState) => {
+    const userRole = getState().users.role;
+    if (userRole === 'customer') {
+      dispatch(fetchProductsInCartAction(products))  //actionの呼び出し
+    } else {
+      return false
+    }
   }
 };
 
