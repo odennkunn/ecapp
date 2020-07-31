@@ -25,7 +25,8 @@ const useStyles = makeStyles({
     margin: '0 0 0 auto'
   },
   logo: {
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
+    cursor: 'pointer'
   }
 });
 
