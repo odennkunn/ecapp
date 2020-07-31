@@ -7,16 +7,16 @@ import {OrderedProducts} from './index'
 const datetimeToString = (date) => {
   return date.getFullYear() + '-'
     + ('00' + (date.getMonth() + 1)).slice(-2) + '-'
-    + ('00' + date.getDate()).slice(-2) + ''
+    + ('00' + date.getDate()).slice(-2) + '\t'
     + ('00' + date.getHours()).slice(-2)+ ':'
     + ('00' + date.getMinutes()).slice(-2) + ':'
     + ('00' + date.getSeconds()).slice(-2)
 }
 
 const dateToString = (date) => {
-  return date.getFullYear() + '-'
-  + ('00' + (date.getMonth() + 1)).slice(-2) + '-'
-  + ('00' + date.getDate()).slice(-2)
+  return date.getFullYear() + '年'
+  + ('00' + (date.getMonth() + 1)).slice(-2) + '月'
+  + ('00' + date.getDate()).slice(-2) + '日'
 }
 
 const OrderHistoryItem = (props) => {
