@@ -18,11 +18,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       margin: 8,
-      width: 'calc(50% - 16px)'
+      width: 'calc(50% - 16px)',
+      cursor: 'pointer'
     },
     [theme.breakpoints.up('md')]: {
       margin: 16,
-      width: 'calc(33.3333% - 32px)'
+      width: 'calc(33.3333% - 32px)',
+      cursor: 'pointer'
     }
   },
   content: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '100%'
   },
   price: {
-    color: theme.palette.secondary.main,
+    color: '#323232',
     fontSize: 16
   }
 }));
