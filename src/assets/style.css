@@ -76,6 +76,16 @@
   flex-flow: column;
 }
 
+.back-gray {
+  margin-top: 30px;
+  width: 512px;
+  max-width: 512px;
+  padding: 30px;
+  background: #F6F6F6;
+  border: 1px solid #EDEDED;
+  border-radius: 6px;
+}
+
 .p-grid__row {
   display: flex;
   flex-flow: row wrap;

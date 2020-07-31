@@ -40,13 +40,14 @@ const CartList = () => {
           productsInCart.map(product => <CartListItem key={product.cartId} product={product}/>)
         )}
       </List>
-      <div className="module-spacer--medium" />
       <div className="p-grid__column">
-        {productsInCart.length > 0 && (
-          <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
-        )}
-        <div className="modul e-spacer--extra-extra-small" />
-        <GreyButton label={"ショッピングを続ける"} onClick={backToHome} />
+        <div class="back-gray">
+          {productsInCart.length > 0 && (
+            <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
+          )}
+          <div className="module-spacer--extra-small" />
+          <GreyButton label={"ショッピングを続ける"} onClick={backToHome} />
+        </div>
       </div>
     </section>
   )
