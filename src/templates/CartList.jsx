@@ -43,7 +43,7 @@ const CartList = () => {
         )}
       </List>
       <div className="p-grid__column">
-        <div class="back-gray">
+        <div className="back-gray">
           {productsInCart.length > 0 && (
             <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
           )}
