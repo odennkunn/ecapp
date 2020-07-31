@@ -59,6 +59,8 @@ export const signIn = (email, password) => {
               dispatch(push('/'))  //ログイン後のページ遷移
             })
         }
+      }).catch(() => {
+        alert('サインインに失敗しました。もう一度登録アドレス、パスワードを確認の上お試しください。')
       })
   }
 }
@@ -140,17 +142,28 @@ export const resetPassword = (email) => {
 export const addProductToCart = (addedProduct) => {
   return async(dispatch, getState) => {
     const uid = getState().users.uid;  //useridを取得
+    const userRole = getState().users.role;
     const cartRef = db.collection('users').doc(uid).collection('cart').doc()  //idを元に取得したuserの中のcartデータを取得
-    addedProduct['cartId'] = cartRef.id;  //cartidをフィールドに持たせる
-    await cartRef.set(addedProduct);
-    dispatch(push('/'))
+    if (userRole === 'customer') {
+      addedProduct['cartId'] = cartRef.id;  //cartidをフィールドに持たせる
+      await cartRef.set(addedProduct);
+      alert('商品をカートに追加しました。')
+      dispatch(push('/'))
+    } else {
+      return false
+    }
   }
 }
 
 //cartの情報を更新する関数
 export const fetchProductsInCart = (products) => {
-  return async (dispatch) => {
-    dispatch(fetchProductsInCartAction(products))  //actionの呼び出し
+  return async (dispatch, getState) => {
+    const userRole = getState().users.role;
+    if (userRole === 'customer') {
+      dispatch(fetchProductsInCartAction(products))  //actionの呼び出し
+    } else {
+      return false
+    }
   }
 };
 
