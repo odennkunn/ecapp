@@ -123,6 +123,12 @@
   height: auto;
 }
 
+.list-h {
+  text-align: left;
+  color: #2d2d2d;
+  font-size: 1.3rem;
+}
+
 /*********** Footer ***********/
 .l-footer {
   display: flex;
