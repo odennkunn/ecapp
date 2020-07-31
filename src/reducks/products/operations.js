@@ -151,6 +151,7 @@ export const orderProduct = (productsInCart, amount) => {
 
           orderRef.set(history)  //上で作成したサブコレクションにデータを入れる
 
+          alert('注文が完了しました。')
           dispatch(push('/order/complete'))
 
         }).catch(() => {
