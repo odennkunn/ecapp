@@ -36,17 +36,20 @@ const CartList = () => {
     <section className="c-section-wrapin">
       <h2 className="u-text__headline">ショッピングカート</h2>
       <List className={classes.root}>
-        {productsInCart.length > 0 && (
+        {productsInCart.length > 0 ? (
           productsInCart.map(product => <CartListItem key={product.cartId} product={product}/>)
+        ) : (
+          <p>ショッピングカート内に商品がありません。</p>
         )}
       </List>
-      <div className="module-spacer--medium" />
       <div className="p-grid__column">
-        {productsInCart.length > 0 && (
-          <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
-        )}
-        <div className="modul e-spacer--extra-extra-small" />
-        <GreyButton label={"ショッピングを続ける"} onClick={backToHome} />
+        <div className="back-gray">
+          {productsInCart.length > 0 && (
+            <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
+          )}
+          <div className="module-spacer--extra-small" />
+          <GreyButton label={"ショッピングを続ける"} onClick={backToHome} />
+        </div>
       </div>
     </section>
   )

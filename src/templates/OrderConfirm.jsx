@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   orderBox: {
-    border: '1px solid rgba(0,0,0,0.2)',
+    backgroundColor: '#F6F6F6',
+    border: '1px solid #EDEDED',
     borderRadius: 4,
-    boxShadow: '0 4px 2px 2px rgba(0,0,0,0.2)',
-    height: 256,
+    height: 260,
     margin: '24px auto 16px auto',
-    padding: 16,
-    width: 288
+    padding: 20,
+    width: 300
   }
 }));
 

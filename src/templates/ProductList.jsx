@@ -20,6 +20,7 @@ const ProductList = () => {
 
   return (
     <section className="c-section-wrapin">
+      <h2 className="list-h">新着商品</h2>
       <div className="p-grid__row">
         {products.length > 0 && (  //商品が一つ以上登録されているとき
           products.map(product => (  //mapで商品一つ一つを回して、productcardに渡す

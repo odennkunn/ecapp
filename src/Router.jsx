@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router'; //ルーター関係
-import {SignIn, Reset, SignUp, ProductEdit, ProductList, ProductDetail, CartList, OrderConfirm, OrderHistory} from './templates' //各テンプレートのインポート
+import {SignIn, Reset, SignUp, ProductEdit, ProductList, ProductDetail, CartList, OrderConfirm, OrderHistory, OrderComplete} from './templates' //各テンプレートのインポート
 import Auth from './Auth'  //authテンプレート
 
 const Router = () => {
@@ -20,6 +20,7 @@ const Router = () => {
         <Route exact path={"/cart"} component={CartList} />
         <Route exact path={"/order/confirm"} component={OrderConfirm} />
         <Route exact path={"/order/history"} component={OrderHistory} />
+        <Route exact path={"/order/complete"} component={OrderComplete} />
       </Auth>
     </Switch>
   )

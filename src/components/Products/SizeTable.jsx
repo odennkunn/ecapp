@@ -43,7 +43,7 @@ const SizeTable = (props) => {
                       <ShoppingCartIcon />
                     </IconButton>
                   ) : (
-                    <div>売り切れ</div>
+                    <div className="sold">売り切れ</div>
                   )}
                 </TableCell>
                 <TableCell className={classes.iconCell}>

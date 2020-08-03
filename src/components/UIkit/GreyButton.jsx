@@ -5,11 +5,12 @@ import {makeStyles} from '@material-ui/styles';
 //style変更のためのclass作成
 const useStyles = makeStyles((theme) => ({
   'button': {
-    backgroundColor: theme.palette.grey['300'],
+    backgroundColor: '#2490D0',
     fontSize: 16,
     height: 48,
     marginBottom: 16,
-    width: 256
+    width: 256,
+    color: '#fff'
   }
 }))
 
