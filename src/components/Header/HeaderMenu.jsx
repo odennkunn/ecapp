@@ -4,10 +4,10 @@ import {Badge} from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MenuIcon from "@material-ui/icons/Menu";
-import {getProductsInCart, getUserRole} from '../../reducks/users/selectors';
+import {getProductsInCart, getUserRole, getUserLikes} from '../../reducks/users/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../firebase';
-import {fetchProductsInCart} from '../../reducks/users/operations';
+import {fetchProductsInCart, fetchLikesProducts} from '../../reducks/users/operations';
 import {getUserId} from '../../reducks/users/selectors';
 import { push } from 'connected-react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,6 +25,7 @@ const HeaderMenu = (props) => {
   const userRole = getUserRole(selector);
   const uid = getUserId(selector);  //useridの取得
   let productsInCart = getProductsInCart(selector);  //card内情報の取得
+  let likesProducts = getUserLikes(selector);
 
   useEffect(() => {
     const unsubscribe = db.collection('users').doc(uid).collection('cart')  //userのcardの情報を取得して定数に
@@ -51,6 +52,32 @@ const HeaderMenu = (props) => {
       return () => unsubscribe()  //クリーンアップ関数に最初に設定した定数を入れてリスナーを解除するようにしないと、リスナーが増え続けてしまうため記述
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = db.collection('users').doc(uid).collection('likes')
+      .onSnapshot(snapshots => {
+        snapshots.docChanges().forEach(change => {
+          const product = change.doc.data();
+          const changeType = change.type;
+          switch (changeType) {
+            case 'added':
+            likesProducts.push(product)
+              break;
+            case 'modified':
+              const index = likesProducts.findIndex(product => product.id === change.doc.id)
+              likesProducts[index] = product
+            case 'removed':
+            likesProducts = likesProducts.filter(product => product.cartId !== change.doc.id)
+              break;
+            default:
+              break;
+          }
+        })
+        dispatch(fetchLikesProducts(likesProducts))
+      })
+      return () => unsubscribe()
+  }, []);
+
+
   return (
     <>
     {userRole === 'customer' && (
@@ -60,7 +87,7 @@ const HeaderMenu = (props) => {
             <ShoppingCartIcon className={classes.menuIcon} />
           </Badge>
         </IconButton>
-        <IconButton >
+        <IconButton onClick={() => dispatch(push('/like'))}>
           <FavoriteBorderIcon className={classes.menuIcon} />
         </IconButton>
       </>

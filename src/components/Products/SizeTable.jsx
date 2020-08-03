@@ -4,7 +4,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -48,7 +47,7 @@ const SizeTable = (props) => {
                 </TableCell>
                 <TableCell className={classes.iconCell}>
                   <IconButton>
-                    <FavoriteBorderIcon />
+                    <FavoriteBorderIcon onClick={() => props.addLikeProduct(size.size)}/>
                   </IconButton>
                 </TableCell>
               </TableRow>

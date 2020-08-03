@@ -1,4 +1,4 @@
-import {signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction} from './actions';
+import {signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction, fetchLikesProductsAction} from './actions';
 import {push} from 'connected-react-router';
 import {auth, FirebaseTimestamp, db} from '../../firebase/index';
 
@@ -155,12 +155,41 @@ export const addProductToCart = (addedProduct) => {
   }
 }
 
+//いいねした時
+export const addLikeToProduct = (addedProduct) => {
+  return async(dispatch, getState) => {
+    const uid = getState().users.uid;  //useridを取得
+    const userRole = getState().users.role;
+    const likesRef = db.collection('users').doc(uid).collection('likes').doc()  //idを元に取得したuserの中のcartデータを取得
+    if (userRole === 'customer') {
+      addedProduct['likesId'] = likesRef.id;  //cartidをフィールドに持たせる
+      await likesRef.set(addedProduct);
+      alert('お気に入りに追加しました')
+      dispatch(push('/'))
+    } else {
+      return false
+    }
+  }
+}
+
 //cartの情報を更新する関数
 export const fetchProductsInCart = (products) => {
   return async (dispatch, getState) => {
     const userRole = getState().users.role;
     if (userRole === 'customer') {
       dispatch(fetchProductsInCartAction(products))  //actionの呼び出し
+    } else {
+      return false
+    }
+  }
+};
+
+//いいねの情報を更新する関数
+export const fetchLikesProducts = (products) => {
+  return async (dispatch, getState) => {
+    const userRole = getState().users.role;
+    if (userRole === 'customer') {
+      dispatch(fetchLikesProductsAction(products))  //actionの呼び出し
     } else {
       return false
     }

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import HTMLReactParser from 'html-react-parser';
 import {ImageSwiper, SizeTable} from '../components/Products';
-import {addProductToCart} from '../reducks/users/operations';
+import {addProductToCart, addLikeToProduct} from '../reducks/users/operations';
 import { getUserRole } from '../reducks/users/selectors';
 
 
@@ -82,6 +82,21 @@ const ProductDetail = () => {
     }))
   }, [product]);
 
+  //いいねした時のstate更新
+  const addLikeProduct = useCallback((selectedSize) => {
+    const timestamp = FirebaseTimestamp.now();
+    dispatch(addLikeToProduct({
+      added_at: timestamp,
+      description: product.description,
+      gender: product.gender,
+      images:　product.images,
+      name: product.name,
+      price: product.price,
+      productId: product.id,
+      size: selectedSize
+    }))
+  }, [product])
+
   return (
     <section className="c-section-wrapin">
       {product && (
@@ -94,7 +109,7 @@ const ProductDetail = () => {
             <p className={classes.price}>{product.price.toLocaleString()}</p>
             <div className="module-spacer--small" />
             {userRole === 'customer' && (
-              <SizeTable sizes={product.sizes} addProduct={addProduct} />
+              <SizeTable sizes={product.sizes} addProduct={addProduct} addLikeProduct={addLikeProduct} />
             )}
             <div className="module-spacer--small" />
             <p>{returnCodeToBr(product.description)}</p>
