@@ -19,6 +19,11 @@ export const UsersReducer = (state = initialState.users, action) => {
       ...state,
       cart: [...action.payload]  //スプレッド構文で配列の中に取得してきた配列を展開
     };
+    case Actions.FETCH_LIKES_PRODUCTS:
+    return {
+      ...state,
+      cart: [...action.payload]  //スプレッド構文で配列の中に取得してきた配列を展開
+    };
     case Actions.FETCH_ORDERS_HISTORY:
       return {
         ...state,
