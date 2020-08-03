@@ -138,6 +138,16 @@
 .sold {
   font-size: .7rem;
 }
+
+.swiper-button-next {
+  color: #CCCCCC;
+}
+
+.swiper-button-prev {
+  color: #CCCCCC;
+}
+
+
 /*********** Footer ***********/
 .l-footer {
   display: flex;
