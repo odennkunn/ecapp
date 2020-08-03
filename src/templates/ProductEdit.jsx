@@ -15,8 +15,6 @@ const ProductEdit = () => {
     id = id.split('/')[1];  //さらに/を取り除いたid部分だけを取得
   }
 
-
-
   //商品のstateを宣言
   const [name, setName] = useState(""),
         [description, setDescription] = useState(""),
