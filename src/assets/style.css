@@ -135,6 +135,9 @@
   color: #2d2d2d;
 }
 
+.sold {
+  font-size: .7rem;
+}
 /*********** Footer ***********/
 .l-footer {
   display: flex;
