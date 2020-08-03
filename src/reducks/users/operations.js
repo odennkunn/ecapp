@@ -156,7 +156,7 @@ export const addProductToCart = (addedProduct) => {
 }
 
 //いいねした時
-export const addLikeProduct = (addedProduct) => {
+export const addLikeToProduct = (addedProduct) => {
   return async(dispatch, getState) => {
     const uid = getState().users.uid;  //useridを取得
     const userRole = getState().users.role;

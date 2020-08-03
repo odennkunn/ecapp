@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import HTMLReactParser from 'html-react-parser';
 import {ImageSwiper, SizeTable} from '../components/Products';
-import {addProductToCart} from '../reducks/users/operations';
+import {addProductToCart, addLikeToProduct} from '../reducks/users/operations';
 import { getUserRole } from '../reducks/users/selectors';
 
 
@@ -85,7 +85,7 @@ const ProductDetail = () => {
   //いいねした時のstate更新
   const addLikeProduct = useCallback((selectedSize) => {
     const timestamp = FirebaseTimestamp.now();
-    dispatch(addProductToCart({
+    dispatch(addLikeToProduct({
       added_at: timestamp,
       description: product.description,
       gender: product.gender,
