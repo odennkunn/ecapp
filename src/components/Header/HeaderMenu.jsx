@@ -60,7 +60,7 @@ const HeaderMenu = (props) => {
             <ShoppingCartIcon className={classes.menuIcon} />
           </Badge>
         </IconButton>
-        <IconButton >
+        <IconButton onClick={() => dispatch(push('/like'))}>
           <FavoriteBorderIcon className={classes.menuIcon} />
         </IconButton>
       </>
