@@ -9,7 +9,8 @@ const initialState = {
     username: "",
     role: "",
     cart: [],
-    orders: []
+    orders: [],
+    likes: []
   }
 };
 
