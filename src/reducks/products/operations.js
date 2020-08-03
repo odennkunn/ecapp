@@ -36,8 +36,15 @@ export const deleteProduct = (id) => {
   }
 }
 
+//商品登録
 export const saveProduct = (id, name, description, category, gender, price, images, sizes) => {
   return async (dispatch) => {
+
+    if (name === "" || description === "" || category === "" || gender === "" || price === "" || sizes === "") {
+      alert('必須項目が未入力です')
+      return false
+    }
+
     const timestamp = FirebaseTimestamp.now()
 
     //firestoreに格納するデータの宣言
