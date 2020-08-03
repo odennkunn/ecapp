@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router'; //ルーター関係
-import {SignIn, Reset, SignUp, ProductEdit, ProductList, ProductDetail, CartList, OrderConfirm, OrderHistory, OrderComplete} from './templates' //各テンプレートのインポート
+import {SignIn, Reset, SignUp, ProductEdit, ProductList, ProductDetail, CartList, OrderConfirm, OrderHistory, OrderComplete, LikeList} from './templates' //各テンプレートのインポート
 import Auth from './Auth'  //authテンプレート
 
 const Router = () => {
@@ -18,6 +18,7 @@ const Router = () => {
         <Route path={"/product/edit(/:id)?"} component={ProductEdit} />  {/* ()?で囲んだ文字列はあってもなくてもマッチ */}
         <Route exact path={"/product/:id"} component={ProductDetail} />
         <Route exact path={"/cart"} component={CartList} />
+        <Route exact path={"/like"} component={LikeList} />
         <Route exact path={"/order/confirm"} component={OrderConfirm} />
         <Route exact path={"/order/history"} component={OrderHistory} />
         <Route exact path={"/order/complete"} component={OrderComplete} />
