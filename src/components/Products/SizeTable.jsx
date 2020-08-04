@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 const SizeTable = (props) => {
 
   const classes = useStyles();
-
   const sizes = props.sizes;
 
   return (
@@ -47,7 +46,7 @@ const SizeTable = (props) => {
                 </TableCell>
                 <TableCell className={classes.iconCell}>
                   <IconButton>
-                    <FavoriteBorderIcon onClick={() => props.addLikeProduct(size.size)}/>
+                    <FavoriteBorderIcon/>
                   </IconButton>
                 </TableCell>
               </TableRow>
