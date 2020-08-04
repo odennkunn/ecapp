@@ -32,8 +32,3 @@ export const getUserRole = createSelector(
   [usersSelector],
   state => state.role
 )
-
-export const getUserLikes = createSelector(
-  [usersSelector],
-  state => state.likes
-)

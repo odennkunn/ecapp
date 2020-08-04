@@ -36,6 +36,7 @@ const CartListItem = (props) => {
   const price = props.product.price.toLocaleString();
   const name = props.product.name;
   const size = props.product.size;
+  const cartId = props.product.cartId;
 
   //カート内商品を削除
   const removeProductFromCart = (id) => {
@@ -52,7 +53,7 @@ const CartListItem = (props) => {
           <ListItemText primary={name} secondary={'サイズ:' + size}/>
           <ListItemText primary={'¥' + price}/>
         </div>
-        <IconButton onClick={() => removeProductFromCart(props.product.cartId)}>
+        <IconButton onClick={() => removeProductFromCart(cartId)}>
           <DeleteIcon />
         </IconButton>
       </ListItem>

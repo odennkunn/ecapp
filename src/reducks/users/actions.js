@@ -41,11 +41,3 @@ export const fetchOrdersHistoryAction = (history) => {
     payload: history  //historyはoperationsのfetchOrderHistoryのlistをさす
   }
 }
-
-export const FETCH_LIKES_PRODUCTS = "FETCH_LIKES_PRODUCTS";
-export const fetchLikesProductsAction = (products) => {
-  return {
-    type: "FETCH_LIKES_PRODUCTS",
-    payload: products
-  }
-}
