@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import {Badge} from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MenuIcon from "@material-ui/icons/Menu";
 import {getProductsInCart, getUserRole, getUserLikes} from '../../reducks/users/selectors';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,6 +16,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   menuIcon: {
     color: '#fff'
+  },
+  likeIcon: {
+    color: '#ffc0cb'
   }
 });
 
@@ -87,9 +91,15 @@ const HeaderMenu = (props) => {
             <ShoppingCartIcon className={classes.menuIcon} />
           </Badge>
         </IconButton>
-        <IconButton onClick={() => dispatch(push('/like'))}>
-          <FavoriteBorderIcon className={classes.menuIcon} />
-        </IconButton>
+        {likesProducts.length > 0 ? (
+          <IconButton onClick={() => dispatch(push('/like'))}>
+            <FavoriteIcon className={classes.likeIcon}/>
+          </IconButton>
+        ) : (
+          <IconButton onClick={() => dispatch(push('/like'))}>
+            <FavoriteBorderIcon className={classes.menuIcon} />
+          </IconButton>
+        )}
       </>
     )}
       <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
