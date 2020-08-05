@@ -7,13 +7,12 @@ import { getOrdersHistory } from '../reducks/users/selectors';
 import { useEffect } from 'react';
 
 
-const CartList = () => {
+const OrderComplete = () => {
 
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const orders = getOrdersHistory(selector);
-  const ids = orders.map(order => order.id)
-
+  const ids = orders.map(order => order.id);
 
   //ホーム画面に戻る関数
   const backToHome = useCallback(() => {
@@ -39,4 +38,4 @@ const CartList = () => {
   )
 }
 
-export default CartList
+export default OrderComplete
