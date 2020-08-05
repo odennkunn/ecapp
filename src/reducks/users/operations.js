@@ -9,11 +9,9 @@ export const listenAuthState = () => {
     return auth.onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid
-
         db.collection('users').doc(uid).get()
           .then(snapshot => {
             const data = snapshot.data()
-
             dispatch(signInAction({
               isSignedIn: true,
               role: data.role,
@@ -41,21 +39,17 @@ export const signIn = (email, password) => {
     auth.signInWithEmailAndPassword(email, password)
       .then(result => {
         const user = result.user //サインインするuserの情報を全て定数に
-
         if (user) { //userが存在していたら
           const uid = user.uid  //uidを定数に
-
           db.collection('users').doc(uid).get()
             .then(snapshot => {
               const data = snapshot.data()  //サインインするuserのデータを取得
-
               dispatch(signInAction({  //actionで変更
                 isSignedIn: true,
                 role: data.role,
                 uid: uid,
                 username: data.username
               }))
-
               dispatch(push('/'))  //ログイン後のページ遷移
             })
         }
@@ -73,20 +67,16 @@ export const signUp = (username, email, password, confirmPassword, role) => {
       alert('必須項目が未入力です')
       return false
     }
-
     if (password !== confirmPassword) {
       alert('確認用パスワードが一致しません。もう一度ご入力ください')
       return false
     }
-
     return auth.createUserWithEmailAndPassword(email, password)
       .then (result => {
         const user = result.user
-
         if (user) {
           const uid = user.uid
           const timestamp = FirebaseTimestamp.now()  //作成時のtimestampを定数に
-
           const userInitialData = {  //user作成時のデータ
             created_at: timestamp,
             email: email,
@@ -95,7 +85,6 @@ export const signUp = (username, email, password, confirmPassword, role) => {
             updated_at: timestamp,
             username: username
           }
-
           db.collection('users').doc(uid).set(userInitialData)  //firestoreに保存
             .then(() => {
               alert('アカウントが作成できました!')
@@ -132,7 +121,7 @@ export const resetPassword = (email) => {
           alert('入力されたアドレスにパスワードリセット用のメールを送信しました。')
           dispatch(push('/signin'))  //ページ遷移
         }).catch(() => {  //通信環境が悪いなどの失敗時
-          alert('パスワードリセットに失敗しました。')
+          alert('パスワードリセット用のメールを送信できませんでした。通信環境をお確かめの上もう一度おためしください。')
         })
     }
   }
@@ -172,7 +161,6 @@ export const fetchOrdersHistory = () => {
   return async (dispatch, getState) => {
     const uid = getState().users.uid;  //useridの取得
     const list = [];
-
     db.collection('users').doc(uid)
       .collection('orders')
       .orderBy('updated_at', 'desc')
